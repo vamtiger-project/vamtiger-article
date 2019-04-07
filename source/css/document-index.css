@@ -1,0 +1,307 @@
+@import "custom-properties";
+
+vamtiger-article
+{
+    & div,
+    & header,
+    & h1,
+    & h2,
+    & p
+    {
+        margin: 0;
+        padding: 0;
+    }
+
+    & [slot="close-bar"]
+    {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        padding: 0.65em;
+
+        background-color: rgba(255, 255, 255, 1);
+
+        filter: drop-shadow(0px -7px 7px black);
+
+        display: grid;
+
+        cursor: pointer;
+
+        z-index: 0;
+        visibility: hidden;
+
+        & [data-close-bar-title]
+        {
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            grid-template-areas: "vamtigerArticleCloseBarTitleIcon vamtigerArticleCloseBarTitleCaption";
+            grid-column-gap: 0.5em;
+
+            text-transform: var(--vamtiger-article-heading-text-transform);
+
+            & [data-close-bar-title-icon]
+            {
+                grid-area: vamtigerArticleCloseBarTitleIcon;
+            }
+
+            & [data-close-bar-title-caption]
+            {
+                grid-area: vamtigerArticleCloseBarTitleCaption;
+            }
+        }
+    }
+
+    & [data-back-button-container]
+    {
+        display: flex;
+        align-items: center;
+
+        & svg[data-back-button-icon]
+        {
+            margin-right: 0.3em;
+        }
+
+        & [data-back-button-caption]
+        {
+            text-transform: var(--vamtiger-article-heading-text-transform);
+        }
+    }
+
+    & [slot="close-bar"] > *
+    {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    & [data-social-media]
+    {
+        display: flex;
+        justify-content: center;
+
+        & vamtiger-social-media-button
+        {
+            width: 50px;
+            height: 50px;
+        }
+
+        & vamtiger-social-media-button:nth-of-type(n+2)
+        {
+            margin-left: 1em;
+        }
+    }
+
+    & vamtiger-cover-figure[data-loaded] [slot="dark-overlay"]:first-of-type
+    {
+        display: none;
+    }
+
+    & vamtiger-cover-figure[data-loaded] [slot="dark-overlay"]:last-of-type
+    {
+        background: linear-gradient(
+            180deg,rgba(0, 0, 0, 0)
+            5%,rgba(0, 0, 0, 0)
+            40%,rgba(0, 0, 0, 0.2)
+            60%,rgba(0, 0, 0, 0.5)
+        );
+    }
+}
+
+vamtiger-article [slot="cover"]
+{
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 1;
+}
+
+vamtiger-article > [slot="vamtiger-article"]
+{
+    z-index: 2;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    overflow: auto;
+
+    & [data-article-container],
+    & [data-article-container] [data-heading],
+    & [data-article-container] [data-paragraphs]
+    {
+        display: grid;
+    }
+
+    & [data-hidden-cover]
+    {
+        height: 100%;
+    }
+
+    & [data-article-container]
+    {
+        position: relative;
+        background-color: white;
+        box-sizing: border-box;
+
+        grid-gap: var(--vamtiger-article-copy-date-gap);
+
+        min-height: 100%;
+
+        @apply --vamtiger-article-container-padding;
+    }
+
+    & [data-article-container] [data-heading]
+    {
+        grid-gap: 0.5em;
+    }
+
+    & [data-article-container] [data-heading]
+    {
+        & h1
+        {
+            font-size: 1.4em;
+            letter-spacing: 0.05em;
+            text-transform: var(--vamtiger-article-heading-text-transform);
+        }
+
+        & h2
+        {
+            font-size: 1.1em;
+            letter-spacing: 0.03em;
+            text-transform: var(--vamtiger-article-heading-text-transform);
+        }
+    }
+
+    & [data-article-container] [data-paragraphs]
+    {
+        grid-gap: var(--vamtiger-article-copy-date-gap);
+
+        font-size: 0.9em;
+        letter-spacing: 0.02em;
+    }
+}
+
+@element vamtiger-article [slot="close-bar"] and (min-width: 200px)
+{
+    [data-back-button-container] svg[data-back-button-icon]
+    {
+        width: 12px;
+        height: 12px;
+    }
+
+    [data-back-button-container] [data-back-button-caption]
+    {
+        font-size: 0.8em;
+    }
+
+    [data-close-bar-title] [data-close-bar-title-caption],
+    [data-back-button-container] [data-back-button-caption]
+    {
+        letter-spacing: 0.05em;
+    }
+
+    [data-close-bar-title] [data-close-bar-title-icon]
+    {
+        width: 20px;
+        height: 20px;
+    }
+
+    [data-close-bar-title] [data-close-bar-title-caption]
+    {
+        font-size: 1em;
+    }
+}
+
+@element vamtiger-article [slot="close-bar"] and (max-width: 350px)
+{
+     [data-back-button-container] [data-back-button-caption]
+     {
+         display: none;
+     }
+}
+
+@element vamtiger-article [slot="close-bar"] and (min-width: 500px)
+{
+    [data-back-button-container] svg[data-back-button-icon]
+    {
+        width: 15px;
+        height: 15px;
+    }
+
+    [data-close-bar-title] [data-close-bar-title-caption],
+    [data-back-button-container] [data-back-button-caption]
+    {
+        letter-spacing: 0.1em;
+    }
+
+    [data-back-button-container] [data-back-button-caption]
+    {
+        font-size: 1em;
+    }
+
+    [data-close-bar-title] [data-close-bar-title-icon]
+    {
+        width: 25px;
+        height: 25px;
+    }
+
+    [data-close-bar-title] [data-close-bar-title-caption]
+    {
+        font-size: 1.3em;
+    }
+}
+
+@element vamtiger-article > [slot="vamtiger-article"] [data-article-container] and (min-width: 100px)
+{
+    :self
+    {
+        padding: 0 2%;
+    }
+}
+
+@element vamtiger-article > [slot="vamtiger-article"] [data-article-container] and (min-width: 300px)
+{
+    :self
+    {
+        padding: 0 3%;
+    }
+}
+
+@element vamtiger-article > [slot="vamtiger-article"] [data-article-container] and (min-width: 500px)
+{
+    :self
+    {
+        padding: 0 5%;
+    }
+}
+
+@element vamtiger-article > [slot="vamtiger-article"] [data-article-container] and (min-width: 900px)
+{
+    :self
+    {
+        padding: 0 10%;
+    }
+}
+
+@element vamtiger-article > [slot="vamtiger-article"] [data-article-container] and (min-width: 1200px)
+{
+    :self
+    {
+        padding: 0 15%;
+    }
+}
+
+@element vamtiger-article > [slot="vamtiger-article"] [data-article-container] and (min-width: 1400px)
+{
+    :self
+    {
+        padding: 0 20%;
+    }
+}

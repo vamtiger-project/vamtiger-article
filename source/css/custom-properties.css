@@ -1,0 +1,12 @@
+:root {
+    --vamtiger-article-copy-date-gap: 2.5em;
+
+    --vamtiger-article-heading-text-transform: uppercase;
+
+    --data-close-bar-letter-spacing: 0.1em;
+
+    --vamtiger-article-container-padding: {
+        padding-top: var(--vamtiger-article-copy-date-gap);
+        padding-bottom: var(--vamtiger-article-copy-date-gap);
+    }
+}
